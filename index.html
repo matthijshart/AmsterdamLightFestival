@@ -384,6 +384,14 @@
         }
       }
 
+      const numPeople = parseInt(data.people, 10);
+      if (!Number.isInteger(numPeople) || numPeople < 1 || numPeople > 11) {
+        feedback.classList.remove('sr-only');
+        feedback.className = 'mt-3 text-sm text-red-600';
+        feedback.textContent = 'Maximaal 11 personen.';
+        return;
+      }
+
       const msg = buildMessage(data);
       openWhatsAppOrFallback(msg);
     });
