@@ -198,17 +198,11 @@
           <input id="name" name="name" type="text" required
                  class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div>
-            <label for="phone" class="block text-sm font-medium">Telefoon (of e‑mail)*</label>
-            <input id="phone" name="phone" type="text" required
-                   class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
-          </div>
-          <div>
-            <label for="people" class="block text-sm font-medium">Aantal personen*</label>
-            <input id="people" name="people" type="number" min="1" max="11" required
-                   class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
-          </div>
+        <div>
+          <label for="people" class="block text-sm font-medium">Aantal personen*</label>
+          <input id="people" name="people" type="number" min="1" max="11" required
+                 class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
+          <p id="price-display" class="mt-2 text-sm text-black/70">Prijs: €59,95 p.p.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
@@ -328,15 +322,33 @@
     const form = document.getElementById('booking-form');
     const feedback = document.getElementById('form-feedback');
     const fallbackEmail = document.getElementById('fallback-email');
+    const priceDisplay = document.getElementById('price-display');
+    const peopleInput = document.getElementById('people');
+    const PRICE_PER_PERSON = 59.95;
+
+    function updatePrice() {
+      const count = parseInt(peopleInput.value, 10);
+      const per = PRICE_PER_PERSON.toFixed(2).replace('.', ',');
+      if (count > 0) {
+        const total = (count * PRICE_PER_PERSON).toFixed(2).replace('.', ',');
+        priceDisplay.textContent = `Prijs: €${per} p.p. – Totaal: €${total}`;
+      } else {
+        priceDisplay.textContent = `Prijs: €${per} p.p.`;
+      }
+    }
+
+    updatePrice();
+    peopleInput?.addEventListener('input', updatePrice);
 
     function buildMessage(data) {
+      const total = (data.people * PRICE_PER_PERSON).toFixed(2);
       const lines = [
         'Boekingsaanvraag ALF25',
         `Naam: ${data.name}`,
-        `Contact: ${data.phone}`,
         `Datum: ${data.date}`,
         `Tijd: ${data.time}`,
         `# Personen: ${data.people}`,
+        `Totaalprijs: €${total.replace('.', ',')}`,
         data.message ? `Bericht: ${data.message}` : null
       ].filter(Boolean);
       return lines.join(' | ');
@@ -366,7 +378,6 @@
       e.preventDefault();
       const data = {
         name: document.getElementById('name').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
         people: document.getElementById('people').value.trim(),
         date: document.getElementById('date').value,
         time: document.getElementById('time').value,
@@ -374,7 +385,7 @@
       };
 
       // Simple validation
-      const required = ['name','phone','people','date','time'];
+      const required = ['name','people','date','time'];
       for (const key of required) {
         if (!data[key]) {
           feedback.classList.remove('sr-only');
