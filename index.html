@@ -224,62 +224,6 @@
   </section>
 
 
-  <!-- Booking block -->
-  <section id="boeken" class="py-16 md:py-20 bg-neutral-50" data-reveal>
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl md:text-3xl font-semibold">Boekingsaanvraag</h2>
-      <p class="mt-2 text-black/70">We bewaren geen gegevens; het formulier maakt een WhatsApp- of e‑mailbericht voor je klaar.</p>
-
-      <form id="booking-form" class="mt-8 grid grid-cols-1 gap-5 scroll-mt-24" novalidate>
-        <div>
-          <label for="name" class="block text-sm font-medium">Naam*</label>
-          <input id="name" name="name" type="text" required
-                 class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
-        </div>
-        <div>
-          <label for="phone" class="block text-sm font-medium">Telefoon*</label>
-          <input id="phone" name="phone" type="tel" required
-                 class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
-        </div>
-        <div>
-          <label for="people" class="block text-sm font-medium">Aantal personen*</label>
-          <input id="people" name="people" type="number" min="1" max="11" required
-                 class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
-          <p id="price-display" class="mt-2 text-sm text-black/70">Prijs: €59,95 p.p.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div>
-            <label for="date" class="block text-sm font-medium">Datum*</label>
-            <input id="date" name="date" type="date" required
-                   class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
-          </div>
-          <div>
-            <label for="time" class="block text-sm font-medium">Starttijd*</label>
-            <select id="time" name="time" required
-                    class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent">
-              <option value="">Kies een tijd</option>
-              <option>17:30</option>
-              <option>19:30</option>
-              <option>21:30</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label for="message" class="block text-sm font-medium">Bericht (optioneel)</label>
-          <textarea id="message" name="message" rows="4"
-                    class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
-        </div>
-        <div class="flex flex-wrap gap-3">
-          <button type="submit" class="rounded-2xl bg-black text-white px-6 py-3 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black">Verstuur via WhatsApp</button>
-          <a id="fallback-email" href="#" class="rounded-2xl bg-white ring-1 ring-black/10 px-6 py-3 font-semibold">of e‑mail</a>
-        </div>
-        <p id="form-feedback" class="sr-only" aria-live="polite"></p>
-      </form>
-
-      <p class="mt-4 text-xs text-black/60">Privacy: we plaatsen geen cookies en slaan geen formulierdata op. Je bericht gaat direct via WhatsApp of je eigen e‑mailclient.</p>
-    </div>
-  </section>
-
 
   <!-- FAQ -->
   <section class="py-16 md:py-20">
