@@ -238,6 +238,7 @@
             <input class="rounded-xl border border-black/10 px-4 py-3" id="people" type="number" min="1" max="11" name="people" placeholder="Aantal personen*" required>
             <input class="rounded-xl border border-black/10 px-4 py-3" id="phone" name="phone" placeholder="Telefoon of e-mail*" required>
           </div>
+          <p id="total-price" class="text-sm text-black/70 hidden"></p>
           <textarea class="rounded-xl border border-black/10 px-4 py-3" id="message" name="message" rows="3" placeholder="Opmerkingen (optioneel)"></textarea>
           <div class="flex flex-wrap gap-3 items-center">
             <button type="submit" class="rounded-2xl bg-black text-white px-6 py-3 font-semibold">WhatsApp reserveren</button>
@@ -344,6 +345,13 @@
     const form = document.getElementById('booking-form');
     const feedback = document.getElementById('form-feedback');
     const fallbackEmail = document.getElementById('fallback-email');
+    const peopleInput = document.getElementById('people');
+    const totalPriceEl = document.getElementById('total-price');
+    const pricePerPerson = 59.95;
+
+    function formatCurrency(amount) {
+      return amount.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
+    }
 
     function buildMessage(data) {
       const lines = [
@@ -353,6 +361,7 @@
         `Datum: ${data.date}`,
         `Tijd: ${data.time}`,
         `# Personen: ${data.people}`,
+        data.total ? `Totaal: ${formatCurrency(data.total)}` : null,
         data.message ? `Bericht: ${data.message}` : null
       ].filter(Boolean);
       return lines.join(' | ');
@@ -373,16 +382,31 @@
       feedback.textContent = 'WhatsApp geopend? Zo niet: klik op “of e-mail”.';
     }
 
+    function updatePrice() {
+      const count = Number(peopleInput.value);
+      if (count > 0) {
+        const total = count * pricePerPerson;
+        totalPriceEl.textContent = `Totaal: ${formatCurrency(total)}`;
+        totalPriceEl.classList.remove('hidden');
+      } else {
+        totalPriceEl.classList.add('hidden');
+      }
+    }
+
+    peopleInput?.addEventListener('input', updatePrice);
+
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = {
         name: document.getElementById('name').value.trim(),
         phone: document.getElementById('phone').value.trim(),
-        people: document.getElementById('people').value.trim(),
+        people: peopleInput.value.trim(),
         date: document.getElementById('date').value,
         time: document.getElementById('time').value,
         message: document.getElementById('message').value.trim()
       };
+
+      data.total = pricePerPerson * Number(data.people);
 
       // Simple validation
       const required = ['name','phone','people','date','time'];
