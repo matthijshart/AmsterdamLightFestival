@@ -51,8 +51,8 @@
         <a href="#gallery" class="hidden md:inline-block text-sm hover:underline">Foto's</a>
         <a href="#boeken" class="hidden md:inline-block text-sm hover:underline">Boeken</a>
         <a
-          href="#booking-form"
-          class="inline-flex items-center rounded-2xl bg-black px-4 py-2 text-white text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
+          href="https://wa.me/31624928211?text=Boekingsaanvraag%20ALF25%20%E2%80%93%20Hallo!%20Ik%20wil%20graag%20boeken."
+          class="inline-flex items-center rounded-2xl bg-black px-4 py-2 text-white text-sm font-medium"
         >WhatsApp boeken</a>
       </nav>
     </div>
@@ -231,9 +231,7 @@
   </section>
 
   <!-- Booking block -->
-  <section id="book" class="py-16 md:py-20 bg-neutral-50" data-reveal>
-
-  <section id="boeken" class="py-16 md:py-20 bg-neutral-50">
+  <section id="boeken" class="py-16 md:py-20 bg-neutral-50" data-reveal>
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl md:text-3xl font-semibold">Boekingsaanvraag</h2>
       <p class="mt-2 text-black/70">We bewaren geen gegevens; het formulier maakt een WhatsApp- of e‑mailbericht voor je klaar.</p>
@@ -242,6 +240,11 @@
         <div>
           <label for="name" class="block text-sm font-medium">Naam*</label>
           <input id="name" name="name" type="text" required
+                 class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
+        </div>
+        <div>
+          <label for="phone" class="block text-sm font-medium">Telefoon*</label>
+          <input id="phone" name="phone" type="tel" required
                  class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
         </div>
         <div>
@@ -349,13 +352,10 @@
 
     const gallerySwiper = new Swiper('#gallery .swiper', {
       loop: true,
-      autoplay: { delay: 1500, disableOnInteraction: false },
+      autoplay: { delay: 2500, disableOnInteraction: false },
       slidesPerView: 1,
       spaceBetween: 16,
-      breakpoints: {
-        640: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 }
-      },
+      breakpoints: { 640:{slidesPerView:2}, 1024:{slidesPerView:3} },
       pagination: { el: '#gallery .swiper-pagination', clickable: true },
       navigation: { nextEl: '#gallery .swiper-button-next', prevEl: '#gallery .swiper-button-prev' },
       keyboard: { enabled: true }
@@ -403,6 +403,7 @@
       const lines = [
         'Boekingsaanvraag ALF25',
         `Naam: ${data.name}`,
+        `Telefoon: ${data.phone}`,
         `Datum: ${data.date}`,
         `Tijd: ${data.time}`,
         `# Personen: ${data.people}`,
@@ -417,25 +418,21 @@
     function openWhatsAppOrFallback(msg) {
       const waURL = `https://wa.me/31624928211?text=${encode(msg)}`;
       const mailURL = `mailto:maxenmatthijs25@gmail.com?subject=Boekingsaanvraag%20ALF25&body=${encode(msg)}`;
-
-      // Update fallback link for accessibility
       fallbackEmail.setAttribute('href', mailURL);
-
-      let opened = window.open(waURL, '_blank');
-      if (!opened) { // popup blocked
-        window.location.href = waURL;
-      }
-
-      // Show unobtrusive fallback hint
+      const opened = window.open(waURL, '_blank');
+      if (!opened) window.location.href = waURL;
       feedback.classList.remove('sr-only');
       feedback.className = 'mt-3 text-sm text-black/70';
-      feedback.textContent = 'WhatsApp geopend? Zo niet: je kunt ook via e‑mail versturen (klik op “of e‑mail”).';
+      feedback.textContent = 'WhatsApp geopend? Zo niet: klik op “of e-mail”.';
     }
+
+    const required = ['name','phone','people','date','time'];
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = {
         name: document.getElementById('name').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
         people: document.getElementById('people').value.trim(),
         date: document.getElementById('date').value,
         time: document.getElementById('time').value,
@@ -443,7 +440,6 @@
       };
 
       // Simple validation
-      const required = ['name','people','date','time'];
       for (const key of required) {
         if (!data[key]) {
           feedback.classList.remove('sr-only');
