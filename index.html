@@ -29,6 +29,16 @@
   <style>
     /* Smooth image rendering */
     img { image-rendering: -webkit-optimize-contrast; }
+    /* Scroll reveal animation */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(1.5rem);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
   </style>
 </head>
 <body class="bg-white text-black antialiased">
@@ -108,7 +118,7 @@
   </section>
 
   <!-- Highlights / USP -->
-  <section class="py-16 md:py-20">
+  <section class="py-16 md:py-20" data-reveal>
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <li class="p-6 rounded-2xl ring-1 ring-black/5">
@@ -132,7 +142,7 @@
   </section>
 
   <!-- How to book -->
-  <section id="how" class="py-10 md:py-14 border-y border-black/5 bg-neutral-50">
+  <section id="how" class="py-10 md:py-14 border-y border-black/5 bg-neutral-50" data-reveal>
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl md:text-3xl font-semibold">Zo boek je</h2>
       <ol class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -151,6 +161,21 @@
       </ol>
     </div>
   </section>
+
+ codex/add-smooth-scroll-reveal-for-new-info
+  <!-- Amsterdam Light Festival aanbod -->
+  <section class="py-16 md:py-20" data-reveal>
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-semibold">Amsterdam Light Festival aanbod</h2>
+      <p class="mt-4">Dit winterseizoen varen we weer uit tijdens het Amsterdam Light Festival. Speciaal voor vrienden van de sloep bieden wij:</p>
+      <ul class="mt-6 space-y-2">
+        <li>💶 €59,95 p.p. all-in – inclusief warme glühwein, verse erwtensoep, frisdrank én warme dekentjes</li>
+        <li>🕰️ 1,5 uur varen</li>
+        <li>👥 max. 11 personen</li>
+        <li>📅 27 nov – 18 jan | ⏰ 17:30, 19:30 of 21:30</li>
+      </ul>
+      <p class="mt-6">Met schipper en hostess aan boord die iedereen voorzien van drinken en soep.</p>
+      <p class="mt-2 font-medium">Het zit altijd snel vol → stuur me een appje om te reserveren 👉 <a href="https://wa.me/31624928211" class="underline">06 24 92 82 11</a></p>
 
  codex/add-amsterdam-light-festival-section
   <!-- Amsterdam Light Festival – Aanbod -->
@@ -201,13 +226,14 @@
           <p class="text-sm text-black/60">Het zit snel vol — stuur je voorkeursdatum en tijdslot mee.</p>
         </div>
       </div>
+ main
     </div>
   </section>
 
 
  main
   <!-- Gallery (second Swiper) -->
-  <section id="gallery" class="py-10 md:py-14 border-y border-black/5">
+  <section id="gallery" class="py-10 md:py-14 border-y border-black/5" data-reveal>
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl md:text-3xl font-semibold">Sfeerbeelden</h2>
       <div class="mt-6 swiper">
@@ -233,7 +259,11 @@
   </section>
 
   <!-- Booking block -->
+ codex/add-smooth-scroll-reveal-for-new-info
+  <section id="book" class="py-16 md:py-20 bg-neutral-50" data-reveal>
+
   <section id="boeken" class="py-16 md:py-20 bg-neutral-50">
+ main
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl md:text-3xl font-semibold">Boekingsaanvraag</h2>
       <p class="mt-2 text-black/70">We bewaren geen gegevens; het formulier maakt een WhatsApp- of e‑mailbericht voor je klaar.</p>
@@ -290,7 +320,7 @@
   </section>
 
   <!-- FAQ -->
-  <section class="py-16 md:py-20">
+  <section class="py-16 md:py-20" data-reveal>
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl md:text-3xl font-semibold">Veelgestelde vragen</h2>
       <div class="mt-6 space-y-6">
@@ -366,6 +396,18 @@
       navigation: { nextEl: '#gallery .swiper-button-next', prevEl: '#gallery .swiper-button-prev' },
       keyboard: { enabled: true }
     });
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
 
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
