@@ -52,50 +52,60 @@
     </div>
   </header>
 
-  <!-- Hero with autoslideshow -->
+  <!-- Hero with autoslideshow + per-slide overlay + CTA -->
   <section id="hero" class="relative">
     <div class="swiper h-[80vh]">
       <div class="swiper-wrapper">
-          <!-- Replace with your real images in /public/images/ -->
-          <div class="swiper-slide">
-            <img src="public/images/Solstice_ArtistImpression_ALF13.jpg" alt="Lichtkunst – Solstice"
-                 class="w-full h-full object-cover" loading="eager" />
-          </div>
-          <div class="swiper-slide">
-            <img src="public/images/amsterdam-light-festival-2021-route.jpg" alt="Route Amsterdam Light Festival"
-                 class="w-full h-full object-cover" loading="lazy" />
-          </div>
-          <div class="swiper-slide">
-            <img src="public/images/de-sculpturen-boven-de-herengracht-zijn-gemaakt-van-gevlochten.webp" alt="Sculpturen Herengracht"
-                 class="w-full h-full object-cover" loading="lazy" />
+        <!-- Slide 1 -->
+        <div class="swiper-slide relative">
+          <img src="public/images/Openboat.jpg" alt="Privé boottocht tijdens Amsterdam Light Festival" class="w-full h-full object-cover" loading="eager" />
+          <div class="absolute inset-0 flex items-center justify-center text-center p-4">
+            <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
+              <h1 class="text-3xl md:text-5xl font-bold text-white">Privé boottocht · Amsterdam Light Festival</h1>
+              <p class="mt-2 text-lg text-white/90">Exclusief voor jouw groep · max. 11 personen</p>
+              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
           </div>
         </div>
+        <!-- Slide 2 -->
+        <div class="swiper-slide relative">
+          <img src="public/images/Solstice_ArtistImpression_ALF13.jpg" alt="Lichtkunst Solstice tijdens de rondvaart" class="w-full h-full object-cover" loading="lazy" />
+          <div class="absolute inset-0 flex items-center justify-center text-center p-4">
+            <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
+              <h2 class="text-3xl md:text-5xl font-bold text-white">Warme dekens, glühwein &amp; erwtensoep</h2>
+              <p class="mt-2 text-lg text-white/90">Geniet met vrienden van lichtkunst op de grachten</p>
+              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="swiper-slide relative">
+          <img src="public/images/amsterdam-light-festival-2021-route.jpg" alt="Route van het Amsterdam Light Festival per boot" class="w-full h-full object-cover" loading="lazy" />
+          <div class="absolute inset-0 flex items-center justify-center text-center p-4">
+            <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
+              <h2 class="text-3xl md:text-5xl font-bold text-white">Met schipper én hostess aan boord</h2>
+              <p class="mt-2 text-lg text-white/90">Iedereen verzorgd met drankjes &amp; soep</p>
+              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="swiper-slide relative">
+          <img src="public/images/de-sculpturen-boven-de-herengracht-zijn-gemaakt-van-gevlochten.webp" alt="Lichtkunst boven de Herengracht van dichtbij" class="w-full h-full object-cover" loading="lazy" />
+          <div class="absolute inset-0 flex items-center justify-center text-center p-4">
+            <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
+              <h2 class="text-3xl md:text-5xl font-bold text-white">€59,95 p.p. all-in · 90 min</h2>
+              <p class="mt-2 text-lg text-white/90">Tijdsloten 17:30 · 19:30 · 21:30</p>
+              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Controls -->
       <div class="swiper-pagination"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
-    </div>
-
-    <!-- Hero content overlay -->
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 to-black/10"></div>
-    <div class="absolute inset-0 flex items-end md:items-center">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10 md:pb-0">
-        <div class="pointer-events-auto max-w-xl md:max-w-2xl lg:max-w-3xl text-white">
-          <h1 class="text-4xl md:text-6xl font-semibold leading-tight">Canal Cruise & Light Festival</h1>
-          <p class="mt-3 text-lg md:text-xl opacity-95">Sail through Amsterdam’s shimmering canals during the annual Light Festival.</p>
-          <p class="mt-1 text-base md:text-lg font-medium">Jij regelt de mensen, wij de rest.</p>
-          <div class="mt-6 flex flex-wrap items-center gap-3">
-            <a
-              href="#boeken"
-              class="inline-flex items-center rounded-2xl bg-white text-black px-6 py-3 text-base font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
-              >Nu boeken</a>
-            <a
-              href="tel:+31612345678"
-              class="inline-flex items-center rounded-2xl bg-black/70 text-white px-6 py-3 text-base font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
-              >Bel ons</a>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -324,9 +334,12 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     // Init Swipers
-    const heroSwiper = new Swiper('#hero .swiper', {
+const heroSwiper = new Swiper('#hero .swiper', {
       loop: true,
-      autoplay: { delay: 4000, disableOnInteraction: false },
+      effect: 'fade',
+      speed: 1200,
+      fadeEffect: { crossFade: true },
+      autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
       pagination: { el: '#hero .swiper-pagination', clickable: true },
       navigation: { nextEl: '#hero .swiper-button-next', prevEl: '#hero .swiper-button-prev' },
       keyboard: { enabled: true }
