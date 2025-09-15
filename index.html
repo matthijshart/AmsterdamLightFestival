@@ -40,8 +40,13 @@
         <a href="#how" class="hidden md:inline-block text-sm hover:underline">Hoe boeken</a>
         <a href="#boeken" class="hidden md:inline-block text-sm hover:underline">Boeken</a>
         <a
+ codex/fix-and-clean-up-index.html
+          href="https://wa.me/31624928211?text=Boekingsaanvraag%20ALF25%20%E2%80%93%20Hallo!%20Ik%20wil%20graag%20boeken."
+          class="inline-flex items-center rounded-2xl bg-black px-4 py-2 text-white text-sm font-medium"
+
           href="https://wa.me/31624928211?text=Boekingsaanvraag%20ALF25%20–%20Hallo!%20Ik%20wil%20graag%20boeken."
           class="inline-flex items-center rounded-2xl bg-black px-4 py-2 text-white text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
+ main
         >WhatsApp boeken</a>
       </nav>
     </div>
@@ -138,7 +143,7 @@
       </ol>
     </div>
   </section>
- codex/update-aanbod-en-boekingsaanvraag-sectie
+ 
 
   <!-- Amsterdam Light Festival – Aanbod -->
   <section id="aanbod" class="py-12">
@@ -163,7 +168,7 @@
             <p class="text-lg font-semibold">27 nov – 18 jan</p>
           </div>
         </div>
- main
+
 
   <!-- Gecombineerde sectie: Aanbod + Boekingsaanvraag -->
   <section id="boeken" class="py-16 md:py-20 bg-neutral-50">
@@ -207,6 +212,64 @@
       </div>
     </div>
   </section>
+
+
+  <!-- Booking block -->
+  <section id="boeken" class="py-16 md:py-20 bg-neutral-50" data-reveal>
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-semibold">Boekingsaanvraag</h2>
+      <p class="mt-2 text-black/70">We bewaren geen gegevens; het formulier maakt een WhatsApp- of e‑mailbericht voor je klaar.</p>
+
+      <form id="booking-form" class="mt-8 grid grid-cols-1 gap-5 scroll-mt-24" novalidate>
+        <div>
+          <label for="name" class="block text-sm font-medium">Naam*</label>
+          <input id="name" name="name" type="text" required
+                 class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
+        </div>
+        <div>
+          <label for="phone" class="block text-sm font-medium">Telefoon*</label>
+          <input id="phone" name="phone" type="tel" required
+                 class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
+        </div>
+        <div>
+          <label for="people" class="block text-sm font-medium">Aantal personen*</label>
+          <input id="people" name="people" type="number" min="1" max="11" required
+                 class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
+          <p id="price-display" class="mt-2 text-sm text-black/70">Prijs: €59,95 p.p.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label for="date" class="block text-sm font-medium">Datum*</label>
+            <input id="date" name="date" type="date" required
+                   class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent" />
+          </div>
+          <div>
+            <label for="time" class="block text-sm font-medium">Starttijd*</label>
+            <select id="time" name="time" required
+                    class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent">
+              <option value="">Kies een tijd</option>
+              <option>17:30</option>
+              <option>19:30</option>
+              <option>21:30</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium">Bericht (optioneel)</label>
+          <textarea id="message" name="message" rows="4"
+                    class="mt-2 w-full rounded-xl border border-black/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <button type="submit" class="rounded-2xl bg-black text-white px-6 py-3 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black">Verstuur via WhatsApp</button>
+          <a id="fallback-email" href="#" class="rounded-2xl bg-white ring-1 ring-black/10 px-6 py-3 font-semibold">of e‑mail</a>
+        </div>
+        <p id="form-feedback" class="sr-only" aria-live="polite"></p>
+      </form>
+
+      <p class="mt-4 text-xs text-black/60">Privacy: we plaatsen geen cookies en slaan geen formulierdata op. Je bericht gaat direct via WhatsApp of je eigen e‑mailclient.</p>
+    </div>
+  </section>
+
 
   <!-- FAQ -->
   <section class="py-16 md:py-20">
@@ -269,6 +332,32 @@
       keyboard: { enabled: true }
     });
 
+
+    const gallerySwiper = new Swiper('#gallery .swiper', {
+      loop: true,
+      autoplay: { delay: 2500, disableOnInteraction: false },
+      slidesPerView: 1,
+      spaceBetween: 16,
+      breakpoints: { 640:{slidesPerView:2}, 1024:{slidesPerView:3} },
+      pagination: { el: '#gallery .swiper-pagination', clickable: true },
+      navigation: { nextEl: '#gallery .swiper-button-next', prevEl: '#gallery .swiper-button-prev' },
+      keyboard: { enabled: true }
+    });
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+
+
+ main
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -281,7 +370,11 @@
       const lines = [
         'Boekingsaanvraag ALF25',
         `Naam: ${data.name}`,
+ codex/fix-and-clean-up-index.html
+        `Telefoon: ${data.phone}`,
+
         `Contact: ${data.phone}`,
+ main
         `Datum: ${data.date}`,
         `Tijd: ${data.time}`,
         `# Personen: ${data.people}`,
@@ -294,21 +387,22 @@
 
     function openWhatsAppOrFallback(msg) {
       const waURL = `https://wa.me/31624928211?text=${encode(msg)}`;
+ 
+      const mailURL = `mailto:maxenmatthijs25@gmail.com?subject=Boekingsaanvraag%20ALF25&body=${encode(msg)}`;
+
       const mailURL = `mailto:bookings@canalstartup.nl?subject=Boekingsaanvraag%20ALF25&body=${encode(msg)}`;
 
       // Update fallback link for accessibility
+ 
       fallbackEmail.setAttribute('href', mailURL);
-
-      let opened = window.open(waURL, '_blank');
-      if (!opened) { // popup blocked
-        window.location.href = waURL;
-      }
-
-      // Show unobtrusive fallback hint
+      const opened = window.open(waURL, '_blank');
+      if (!opened) window.location.href = waURL;
       feedback.classList.remove('sr-only');
       feedback.className = 'mt-3 text-sm text-black/70';
-      feedback.textContent = 'WhatsApp geopend? Zo niet: je kunt ook via e‑mail versturen (klik op “of e‑mail”).';
+      feedback.textContent = 'WhatsApp geopend? Zo niet: klik op “of e-mail”.';
     }
+
+    const required = ['name','phone','people','date','time'];
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -322,7 +416,10 @@
       };
 
       // Simple validation
+
+
       const required = ['name','phone','people','date','time'];
+ main
       for (const key of required) {
         if (!data[key]) {
           feedback.classList.remove('sr-only');
