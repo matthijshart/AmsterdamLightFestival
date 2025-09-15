@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,9 +49,9 @@
       <nav class="flex items-center gap-3">
         <a href="#how" class="hidden md:inline-block text-sm hover:underline">Hoe boeken</a>
         <a href="#gallery" class="hidden md:inline-block text-sm hover:underline">Foto's</a>
-        <a href="#book" class="hidden md:inline-block text-sm hover:underline">Boeken</a>
+        <a href="#boeken" class="hidden md:inline-block text-sm hover:underline">Boeken</a>
         <a
-          href="https://wa.me/31624928211?text=Boekingsaanvraag%20ALF25%20–%20Hallo!%20Ik%20wil%20graag%20boeken."
+          href="#booking-form"
           class="inline-flex items-center rounded-2xl bg-black px-4 py-2 text-white text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
         >WhatsApp boeken</a>
       </nav>
@@ -62,22 +62,50 @@
   <section id="hero" class="relative">
     <div class="swiper h-[80vh]">
       <div class="swiper-wrapper">
-        <!-- Slideshow images -->
-        <div class="swiper-slide">
+        <!-- Slideshow images with overlay content -->
+        <div class="swiper-slide relative">
           <img src="public/images/Openboat.jpg" alt="Open boat on the Amsterdam canals"
                class="w-full h-full object-cover" loading="eager" />
+          <div class="absolute inset-0 flex items-center justify-center text-center">
+            <div class="bg-black/50 px-6 py-4 rounded-2xl max-w-xl">
+              <h1 class="text-3xl md:text-5xl font-bold text-white">Privé boottocht · Amsterdam Light Festival</h1>
+              <p class="mt-2 text-lg text-white/90">Exclusief voor jouw groep · max. 11 personen</p>
+              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
+          </div>
         </div>
-        <div class="swiper-slide">
+        <div class="swiper-slide relative">
           <img src="public/images/Solstice_ArtistImpression_ALF13.jpg" alt="Lichtkunst – Solstice"
                class="w-full h-full object-cover" loading="lazy" />
+          <div class="absolute inset-0 flex items-center justify-center text-center">
+            <div class="bg-black/50 px-6 py-4 rounded-2xl max-w-xl">
+              <h1 class="text-3xl md:text-5xl font-bold text-white">Warme dekens, glühwein & erwtensoep</h1>
+              <p class="mt-2 text-lg text-white/90">Geniet met vrienden van lichtkunst op de grachten</p>
+              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
+          </div>
         </div>
-        <div class="swiper-slide">
+        <div class="swiper-slide relative">
           <img src="public/images/amsterdam-light-festival-2021-route.jpg" alt="Route Amsterdam Light Festival"
                class="w-full h-full object-cover" loading="lazy" />
+          <div class="absolute inset-0 flex items-center justify-center text-center">
+            <div class="bg-black/50 px-6 py-4 rounded-2xl max-w-xl">
+              <h1 class="text-3xl md:text-5xl font-bold text-white">Met schipper én hostess aan boord</h1>
+              <p class="mt-2 text-lg text-white/90">Iedereen verzorgd met drankjes & soep</p>
+              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
+          </div>
         </div>
-        <div class="swiper-slide">
+        <div class="swiper-slide relative">
           <img src="public/images/de-sculpturen-boven-de-herengracht-zijn-gemaakt-van-gevlochten.webp" alt="Sculpturen Herengracht"
                class="w-full h-full object-cover" loading="lazy" />
+          <div class="absolute inset-0 flex items-center justify-center text-center">
+            <div class="bg-black/50 px-6 py-4 rounded-2xl max-w-xl">
+              <h1 class="text-3xl md:text-5xl font-bold text-white">€59,95 p.p. all-in · 90 min</h1>
+              <p class="mt-2 text-lg text-white/90">Tijdsloten 17:30 · 19:30 · 21:30</p>
+              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Controls -->
@@ -86,27 +114,7 @@
       <div class="swiper-button-next"></div>
     </div>
 
-    <!-- Hero content overlay -->
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 to-black/10"></div>
-    <div class="absolute inset-0 flex items-end md:items-center">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10 md:pb-0">
-        <div class="pointer-events-auto max-w-xl md:max-w-2xl lg:max-w-3xl text-white">
-          <h1 class="text-4xl md:text-6xl font-semibold leading-tight">Canal Cruise & Light Festival</h1>
-          <p class="mt-3 text-lg md:text-xl opacity-95">Sail through Amsterdam’s shimmering canals during the annual Light Festival.</p>
-          <p class="mt-1 text-base md:text-lg font-medium">Jij regelt de mensen, wij de rest.</p>
-          <div class="mt-6 flex flex-wrap items-center gap-3">
-            <a
-              href="#book"
-              class="inline-flex items-center rounded-2xl bg-white text-black px-6 py-3 text-base font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
-              >Nu boeken</a>
-            <a
-              href="tel:+31624928211"
-              class="inline-flex items-center rounded-2xl bg-black/70 text-white px-6 py-3 text-base font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
-              >Bel ons</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Hero overlay removed in favor of per-slide overlays -->
   </section>
 
   <!-- Highlights / USP -->
@@ -154,6 +162,7 @@
     </div>
   </section>
 
+ codex/add-smooth-scroll-reveal-for-new-info
   <!-- Amsterdam Light Festival aanbod -->
   <section class="py-16 md:py-20" data-reveal>
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -167,9 +176,62 @@
       </ul>
       <p class="mt-6">Met schipper en hostess aan boord die iedereen voorzien van drinken en soep.</p>
       <p class="mt-2 font-medium">Het zit altijd snel vol → stuur me een appje om te reserveren 👉 <a href="https://wa.me/31624928211" class="underline">06 24 92 82 11</a></p>
+
+ codex/add-amsterdam-light-festival-section
+  <!-- Amsterdam Light Festival – Aanbod -->
+  <section id="aanbod" class="py-12">
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="rounded-2xl ring-1 ring-black/5 p-6 md:p-8 bg-white">
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <h2 class="text-2xl md:text-3xl font-semibold">Amsterdam Light Festival – Aanbod</h2>
+          <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-black text-white">All-in €59,95 p.p.</span>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="rounded-xl bg-neutral-50 p-4 ring-1 ring-black/5">
+            <p class="text-sm text-black/60">Duur</p>
+            <p class="text-lg font-semibold">90 minuten</p>
+          </div>
+          <div class="rounded-xl bg-neutral-50 p-4 ring-1 ring-black/5">
+            <p class="text-sm text-black/60">Groep</p>
+            <p class="text-lg font-semibold">max. 11 personen</p>
+          </div>
+          <div class="rounded-xl bg-neutral-50 p-4 ring-1 ring-black/5">
+            <p class="text-sm text-black/60">Periode</p>
+            <p class="text-lg font-semibold">27 nov – 18 jan</p>
+          </div>
+        </div>
+
+        <ul class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 text-black/80">
+          <li class="rounded-xl ring-1 ring-black/5 p-4">Warme glühwein, frisdrank & verse erwtensoep inbegrepen</li>
+          <li class="rounded-xl ring-1 ring-black/5 p-4">Warme dekentjes aan boord</li>
+          <li class="rounded-xl ring-1 ring-black/5 p-4">Met schipper & hostess</li>
+          <li class="rounded-xl ring-1 ring-black/5 p-4">Gezellige sloep — geen massatoerisme</li>
+        </ul>
+
+        <div class="mt-6">
+          <p class="text-sm text-black/60 mb-2">Tijdsloten</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-2 rounded-xl ring-1 ring-black/10">17:30</span>
+            <span class="px-3 py-2 rounded-xl ring-1 ring-black/10">19:30</span>
+            <span class="px-3 py-2 rounded-xl ring-1 ring-black/10">21:30</span>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a href="https://wa.me/31624928211?text=Boekingsaanvraag%20ALF%20%7C%20Datum%3A%20__%20%7C%20Tijd%3A%20__%20%7C%20%23personen%3A%20__"
+             class="inline-flex items-center rounded-2xl bg-black text-white px-6 py-3 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black">
+            Reserveer via WhatsApp
+          </a>
+          <p class="text-sm text-black/60">Het zit snel vol — stuur je voorkeursdatum en tijdslot mee.</p>
+        </div>
+      </div>
+ main
     </div>
   </section>
 
+
+ main
   <!-- Gallery (second Swiper) -->
   <section id="gallery" class="py-10 md:py-14 border-y border-black/5" data-reveal>
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -197,12 +259,16 @@
   </section>
 
   <!-- Booking block -->
+ codex/add-smooth-scroll-reveal-for-new-info
   <section id="book" class="py-16 md:py-20 bg-neutral-50" data-reveal>
+
+  <section id="boeken" class="py-16 md:py-20 bg-neutral-50">
+ main
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl md:text-3xl font-semibold">Boekingsaanvraag</h2>
       <p class="mt-2 text-black/70">We bewaren geen gegevens; het formulier maakt een WhatsApp- of e‑mailbericht voor je klaar.</p>
 
-      <form id="booking-form" class="mt-8 grid grid-cols-1 gap-5" novalidate>
+      <form id="booking-form" class="mt-8 grid grid-cols-1 gap-5 scroll-mt-24" novalidate>
         <div>
           <label for="name" class="block text-sm font-medium">Naam*</label>
           <input id="name" name="name" type="text" required
@@ -296,7 +362,7 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <p class="text-sm text-black/60">© <span id="year"></span> ALF25 – Amsterdam</p>
       <div class="flex items-center gap-4 text-sm">
-        <a href="#book" class="hover:underline">Boeken</a>
+        <a href="#boeken" class="hover:underline">Boeken</a>
         <a href="https://instagram.com/" target="_blank" rel="noopener" class="hover:underline">Instagram</a>
       </div>
     </div>
