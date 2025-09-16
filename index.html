@@ -28,7 +28,51 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
     /* Smooth image rendering */
-    img { image-rendering: -webkit-optimize-contrast; }
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    /* Hero scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+    }
+
+    .scroll-indicator .chevron {
+      display: inline-block;
+      opacity: 0.85;
+      animation: bounce 1.8s infinite;
+      transform: translateY(0) rotate(90deg);
+    }
+
+    @keyframes bounce {
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0) rotate(90deg);
+      }
+      40% {
+        transform: translateY(8px) rotate(90deg);
+      }
+      60% {
+        transform: translateY(4px) rotate(90deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-indicator .chevron {
+        animation: none;
+        transform: rotate(90deg);
+      }
+    }
   </style>
 </head>
 <body class="bg-white text-black antialiased">
@@ -133,6 +177,10 @@
 
       <!-- Pagination -->
       <div class="swiper-pagination"></div>
+    </div>
+    <div class="scroll-indicator">
+      <span class="sr-only">Scroll verder om meer te ontdekken</span>
+      <span aria-hidden="true" class="chevron">&#x276F;</span>
     </div>
   </section>
 
