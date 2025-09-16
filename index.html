@@ -42,6 +42,19 @@
   <!-- Swiper (CDN) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
+    :root {
+      --sticky-header: 64px;
+      --extra-gap: 12px;
+    }
+
+    html {
+      scroll-padding-top: calc(var(--sticky-header) + var(--extra-gap));
+    }
+
+    #booking {
+      scroll-margin-top: calc(var(--sticky-header) + var(--extra-gap));
+    }
+
     /* Smooth image rendering */
     img {
       image-rendering: -webkit-optimize-contrast;
@@ -160,7 +173,7 @@
 </head>
 <body class="bg-white text-black antialiased">
   <!-- Announcement bar -->
-  <div class="w-full bg-black/90 text-white/80 text-center text-xs py-1.5 fixed top-0 z-50">
+  <div id="top-announcement" class="w-full bg-black/90 text-white/80 text-center text-xs py-1.5 fixed top-0 z-50">
     Bij regen: kosteloos annuleren of verplaatsen
   </div>
   <!-- Sticky top nav -->
@@ -501,52 +514,48 @@
       keyboard: { enabled: true }
     });
 
-    // Slow scroll for Boek nu links
-    const bookingSection = document.getElementById('booking');
-    const slowBookingLinks = document.querySelectorAll('a[href="#booking"]:not([data-scroll-method="scrollIntoView"])');
-    const scrollIntoViewButtons = document.querySelectorAll('[data-scroll-method="scrollIntoView"]');
+    (function () {
+      const bookingSection = document.getElementById('booking');
 
-    function easeInOutQuad(t) {
-      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-    }
-
-    function slowScrollToBooking(event) {
-      if (!bookingSection) return;
-      event.preventDefault();
-
-      const startY = window.scrollY || window.pageYOffset;
-      const targetY = bookingSection.getBoundingClientRect().top + startY;
-      const distance = targetY - startY;
-      const duration = 1200;
-      let startTime = null;
-
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = easeInOutQuad(progress);
-        window.scrollTo(0, startY + distance * eased);
-
-        if (elapsed < duration) {
-          requestAnimationFrame(step);
-        } else {
-          const { pathname, search } = window.location;
-          window.history.replaceState(null, '', `${pathname}${search}`);
-        }
+      function getStickyOffset() {
+        const header = document.querySelector('header');
+        const announce = document.getElementById('top-announcement');
+        const h = header ? header.getBoundingClientRect().height : 0;
+        const a = announce ? announce.getBoundingClientRect().height : 0;
+        return h + a + 12; // kleine extra marge
       }
 
-      requestAnimationFrame(step);
-    }
+      function setScrollPaddingVar() {
+        document.documentElement.style.setProperty('--sticky-header', getStickyOffset() + 'px');
+      }
+      setScrollPaddingVar();
+      window.addEventListener('resize', setScrollPaddingVar);
 
-    slowBookingLinks.forEach((link) => link.addEventListener('click', slowScrollToBooking));
-
-    scrollIntoViewButtons.forEach((button) => {
-      button.addEventListener('click', (event) => {
+      function scrollToBookingWithOffset(e) {
         if (!bookingSection) return;
-        event.preventDefault();
-        bookingSection.scrollIntoView({ behavior: "smooth" });
-      });
-    });
+        if (e) e.preventDefault();
+        const startY = window.scrollY || window.pageYOffset;
+        const targetY = bookingSection.getBoundingClientRect().top + startY - getStickyOffset();
+        const duration = 600;
+        let start;
+
+        function step(ts) {
+          if (!start) start = ts;
+          const progress = Math.min((ts - start) / duration, 1);
+          const eased = progress < 0.5
+            ? 2 * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+          window.scrollTo(0, startY + (targetY - startY) * eased);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      document
+        .querySelectorAll('a[href="#booking"], [data-scroll-method="scrollIntoView"]')
+        .forEach((el) => el.addEventListener('click', scrollToBookingWithOffset));
+    })();
 
 
     const gallerySwiper = new Swiper('#gallery .swiper', {
