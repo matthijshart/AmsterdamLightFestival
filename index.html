@@ -493,7 +493,8 @@
         if (elapsed < duration) {
           requestAnimationFrame(step);
         } else {
-          window.history.replaceState(null, '', '#boeken');
+          const { pathname, search } = window.location;
+          window.history.replaceState(null, '', `${pathname}${search}`);
         }
       }
 
@@ -606,20 +607,6 @@
     peopleInput?.addEventListener('input', handlePeopleInput);
     peopleInput?.addEventListener('blur', handlePeopleInput);
     if (peopleInput) handlePeopleInput();
-
-    const navBooksLink = document.getElementById('nav-books-link');
-    const navWhatsAppButton = document.getElementById('nav-whatsapp-book');
-
-    function scrollToBooking(event) {
-      event.preventDefault();
-      document.getElementById('boeken')?.scrollIntoView({ behavior: 'smooth' });
-      if (typeof history.replaceState === 'function') {
-        history.replaceState(null, '', window.location.pathname);
-      }
-    }
-
-    navBooksLink?.addEventListener('click', scrollToBooking);
-    navWhatsAppButton?.addEventListener('click', scrollToBooking);
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
