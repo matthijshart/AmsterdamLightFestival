@@ -396,7 +396,11 @@
           <textarea class="rounded-xl border border-black/10 px-4 py-3" id="message" name="message" rows="3" placeholder="Opmerkingen (optioneel)"></textarea>
           <div class="flex flex-wrap gap-3 items-center">
             <button type="submit" class="rounded-2xl bg-black text-white px-6 py-3 font-semibold">WhatsApp reserveren</button>
-            <a id="fallback-email" href="#" class="rounded-2xl bg-white ring-1 ring-black/10 px-6 py-3 font-semibold">of e‑mail</a>
+            <a
+              id="fallback-email"
+              href="mailto:bookings@canalstartup.nl?subject=Boekingsaanvraag%20ALF25&body=Ik%20wil%20graag%20een%20vaartocht%20boeken%20tijdens%20het%20Amsterdam%20Light%20Festival%20op%20%5Bdatum%5D%20om%20%5Btijd%5D%20met%20%5Baantal%5D%20personen."
+              class="rounded-2xl bg-white ring-1 ring-black/10 px-6 py-3 font-semibold"
+            >of e‑mail</a>
           </div>
           <p id="form-feedback" class="text-sm text-black/60">Het zit snel vol — stuur je voorkeursdatum en tijdslot mee.</p>
         </form>
@@ -442,7 +446,10 @@
         <div class="grid grid-cols-3 divide-x divide-black/10">
           <a href="https://wa.me/31624978211?text=Boekingsaanvraag%20ALF25" class="py-3 text-center font-semibold">WhatsApp</a>
           <a href="tel:+31624978211" class="py-3 text-center font-semibold">Bel</a>
-          <a href="mailto:maxenmatthijs25@gmail.com?subject=Boekingsaanvraag%20ALF25" class="py-3 text-center font-semibold">E‑mail</a>
+          <a
+            href="mailto:maxenmatthijs25@gmail.com?subject=Boekingsaanvraag%20ALF25&body=Ik%20wil%20graag%20een%20vaartocht%20boeken%20tijdens%20het%20Amsterdam%20Light%20Festival%20op%20%5Bdatum%5D%20om%20%5Btijd%5D%20met%20%5Baantal%5D%20personen."
+            class="py-3 text-center font-semibold"
+          >E‑mail</a>
         </div>
       </div>
     </div>
@@ -566,11 +573,26 @@
       return lines.join(' | ');
     }
 
+    function buildEmailBody(data) {
+      const intro = `Ik wil graag een vaartocht boeken tijdens het Amsterdam Light Festival op ${data.date || '[datum]'} om ${data.time || '[tijd]'} met ${data.people || '[aantal]'} personen.`;
+      const extra = [
+        data.name ? `Naam: ${data.name}` : null,
+        data.phone ? `Telefoon: ${data.phone}` : null,
+        data.total ? `Totaal: ${formatCurrency(data.total)}` : null,
+        data.message ? `Bericht: ${data.message}` : null
+      ].filter(Boolean);
+
+      const bodyParts = [intro];
+      if (extra.length) bodyParts.push('', ...extra);
+      return bodyParts.join('\n');
+    }
+
     function encode(str) { return encodeURIComponent(str); }
 
-    function openWhatsAppOrFallback(msg) {
+    function openWhatsAppOrFallback(msg, data) {
       const waURL = `https://wa.me/31624978211?text=${encode(msg)}`;
-      const mailURL = `mailto:bookings@canalstartup.nl?subject=Boekingsaanvraag%20ALF25&body=${encode(msg)}`;
+      const mailBody = buildEmailBody(data);
+      const mailURL = `mailto:bookings@canalstartup.nl?subject=Boekingsaanvraag%20ALF25&body=${encode(mailBody)}`;
 
       // Update fallback link for accessibility
       fallbackEmail.setAttribute('href', mailURL);
@@ -648,7 +670,7 @@
       }
 
       const msg = buildMessage(data);
-      openWhatsAppOrFallback(msg);
+      openWhatsAppOrFallback(msg, data);
     });
   </script>
 </body>
