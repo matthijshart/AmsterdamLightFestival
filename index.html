@@ -153,7 +153,13 @@
       <a href="#hero" class="font-semibold tracking-tight text-xl">ALF25</a>
       <nav class="flex items-center gap-3">
         <a href="#how" class="hidden md:inline-block text-sm hover:underline">Hoe boeken</a>
-        <a href="#boeken" class="hidden md:inline-block text-sm hover:underline">Boeken</a>
+        <a
+          id="nav-books-link"
+          href="#boeken"
+          class="hidden md:inline-block text-sm hover:underline"
+        >
+          Boeken
+        </a>
         <a
           id="nav-whatsapp-book"
           href="https://wa.me/31624978211?text=Boekingsaanvraag%20ALF25%20%E2%80%93%20Hallo!%20Ik%20wil%20graag%20boeken."
@@ -555,6 +561,15 @@
     }
 
     peopleInput?.addEventListener('input', updatePrice);
+
+    const navBooksLink = document.getElementById('nav-books-link');
+    navBooksLink?.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.getElementById('boeken')?.scrollIntoView({ behavior: 'smooth' });
+      if (typeof history.replaceState === 'function') {
+        history.replaceState(null, '', window.location.pathname);
+      }
+    });
 
     const navWhatsAppButton = document.getElementById('nav-whatsapp-book');
     navWhatsAppButton?.addEventListener('click', (event) => {
