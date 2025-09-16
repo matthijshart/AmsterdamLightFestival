@@ -35,13 +35,14 @@
     /* Hero scroll indicator */
     .scroll-indicator {
       position: absolute;
-      bottom: 1.5rem;
+      bottom: calc(1.5rem + env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
       font-size: 2rem;
       color: rgba(255, 255, 255, 0.8);
       text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
       pointer-events: none;
+      z-index: 10;
     }
 
     .scroll-indicator .chevron {
