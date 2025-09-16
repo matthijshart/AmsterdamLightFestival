@@ -40,6 +40,7 @@
         <a href="#how" class="hidden md:inline-block text-sm hover:underline">Hoe boeken</a>
         <a href="#boeken" class="hidden md:inline-block text-sm hover:underline">Boeken</a>
         <a
+          id="nav-whatsapp-book"
           href="https://wa.me/31624978211?text=Boekingsaanvraag%20ALF25%20%E2%80%93%20Hallo!%20Ik%20wil%20graag%20boeken."
           class="inline-flex items-center rounded-2xl bg-black px-4 py-2 text-white text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
         >WhatsApp boeken</a>
@@ -394,6 +395,20 @@
     }
 
     peopleInput?.addEventListener('input', updatePrice);
+
+    const navWhatsAppButton = document.getElementById('nav-whatsapp-book');
+    navWhatsAppButton?.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.getElementById('boeken')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      const waUrl = navWhatsAppButton.getAttribute('href');
+      if (!waUrl) return;
+
+      const newWindow = window.open(waUrl, '_blank', 'noopener');
+      if (!newWindow) {
+        setTimeout(() => { window.location.href = waUrl; }, 600);
+      }
+    });
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
