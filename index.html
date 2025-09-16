@@ -374,7 +374,7 @@
         <form id="booking-form" class="grid gap-4 bg-white p-6 rounded-2xl ring-1 ring-black/5" novalidate>
           <input class="rounded-xl border border-black/10 px-4 py-3" id="name" name="name" placeholder="Naam*" required>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input class="rounded-xl border border-black/10 px-4 py-3" id="date" type="date" name="date" required>
+            <input class="rounded-xl border border-black/10 px-4 py-3" id="date" type="date" name="date" min="2025-11-27" max="2026-01-18" required>
             <select class="rounded-xl border border-black/10 px-4 py-3" id="time" name="time" required>
               <option value="">Kies tijdslot</option>
               <option>17:30</option><option>19:30</option><option>21:30</option>
@@ -533,8 +533,11 @@
     const feedback = document.getElementById('form-feedback');
     const fallbackEmail = document.getElementById('fallback-email');
     const peopleInput = document.getElementById('people');
+    const dateInput = document.getElementById('date');
     const totalPriceEl = document.getElementById('total-price');
     const pricePerPerson = 59.95;
+    const minDate = dateInput?.getAttribute('min');
+    const maxDate = dateInput?.getAttribute('max');
 
     function formatCurrency(amount) {
       return amount.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
@@ -640,6 +643,13 @@
           feedback.textContent = 'Vul alle verplichte velden in.';
           return;
         }
+      }
+
+      if (minDate && maxDate && (data.date < minDate || data.date > maxDate)) {
+        feedback.classList.remove('sr-only');
+        feedback.className = 'mt-3 text-sm text-red-600';
+        feedback.textContent = 'Kies een datum tussen 27 november 2025 en 18 januari 2026.';
+        return;
       }
 
       const msg = buildMessage(data);
