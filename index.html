@@ -381,7 +381,7 @@
             </select>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input class="rounded-xl border border-black/10 px-4 py-3" id="people" type="number" min="1" max="11" name="people" placeholder="Aantal personen*" required>
+            <input class="rounded-xl border border-black/10 px-4 py-3" id="people" type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="11" name="people" placeholder="Aantal personen*" required>
             <input class="rounded-xl border border-black/10 px-4 py-3" id="phone" name="phone" placeholder="Telefoon of e-mail*" required>
           </div>
           <p id="total-price" class="text-sm text-black/70 hidden"></p>
@@ -569,6 +569,17 @@
       feedback.textContent = 'WhatsApp geopend? Zo niet: klik op “of e-mail”.';
     }
 
+    function sanitizePeopleCount(value) {
+      const digitsOnly = value.replace(/\D/g, '');
+      if (!digitsOnly) return '';
+
+      let numericValue = Number(digitsOnly);
+      if (Number.isNaN(numericValue) || numericValue === 0) return '';
+      if (numericValue > 11) numericValue = 11;
+
+      return String(numericValue);
+    }
+
     function updatePrice() {
       const count = Number(peopleInput.value);
       if (count > 0) {
@@ -580,7 +591,18 @@
       }
     }
 
-    peopleInput?.addEventListener('input', updatePrice);
+    function handlePeopleInput() {
+      if (!peopleInput) return;
+      const sanitizedValue = sanitizePeopleCount(peopleInput.value);
+      if (sanitizedValue !== peopleInput.value) {
+        peopleInput.value = sanitizedValue;
+      }
+      updatePrice();
+    }
+
+    peopleInput?.addEventListener('input', handlePeopleInput);
+    peopleInput?.addEventListener('blur', handlePeopleInput);
+    if (peopleInput) handlePeopleInput();
 
     const navBooksLink = document.getElementById('nav-books-link');
     const navWhatsAppButton = document.getElementById('nav-whatsapp-book');
