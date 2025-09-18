@@ -427,17 +427,16 @@
             <input class="rounded-xl border border-black/10 px-4 py-3" id="phone" name="phone" placeholder="Telefoon of e-mail*" required>
           </div>
 
-          <p id="total-price" class="text-sm text-black/70 hidden"></p>
-          <input 
-            class="rounded-xl border border-black/10 px-4 py-3" 
-            id="discount" 
-            name="discount" 
+          <input
+            class="rounded-xl border border-black/10 px-4 py-3"
+            id="discount"
+            name="discount"
             placeholder="Kortingscode (optioneel)">
 
-
           <textarea class="rounded-xl border border-black/10 px-4 py-3" id="message" name="message" rows="3" placeholder="Opmerkingen (optioneel)"></textarea>
+          <!-- Totaalprijs -->
           <p id="total-price" class="hidden mt-3 text-lg font-semibold text-black"></p>
-          <div class="flex flex-wrap gap-3 items-center">
+          <div class="flex flex-wrap gap-3 items-center mt-2">
             <button type="submit" class="rounded-2xl bg-black text-white px-6 py-3 font-semibold">WhatsApp reserveren</button>
             <a
               id="fallback-email"
