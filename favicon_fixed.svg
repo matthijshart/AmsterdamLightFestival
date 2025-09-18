@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2d9a"/>
+      <stop offset="100%" stop-color="#ff6a00"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb400"/>
+      <stop offset="100%" stop-color="#ffea00"/>
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9c27b0"/>
+      <stop offset="100%" stop-color="#e040fb"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- X #1 -->
+  <g transform="translate(256,120)" filter="url(#softGlow)">
+    <rect x="-100" y="-20" width="200" height="40" rx="20" fill="url(#grad1)" transform="rotate(45)"/>
+    <rect x="-100" y="-20" width="200" height="40" rx="20" fill="url(#grad1)" transform="rotate(-45)"/>
+  </g>
+
+  <!-- X #2 -->
+  <g transform="translate(256,256)" filter="url(#softGlow)">
+    <rect x="-100" y="-20" width="200" height="40" rx="20" fill="url(#grad2)" transform="rotate(45)"/>
+    <rect x="-100" y="-20" width="200" height="40" rx="20" fill="url(#grad2)" transform="rotate(-45)"/>
+  </g>
+
+  <!-- X #3 -->
+  <g transform="translate(256,392)" filter="url(#softGlow)">
+    <rect x="-100" y="-20" width="200" height="40" rx="20" fill="url(#grad3)" transform="rotate(45)"/>
+    <rect x="-100" y="-20" width="200" height="40" rx="20" fill="url(#grad3)" transform="rotate(-45)"/>
+  </g>
+</svg>

@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Canal Cruise & Amsterdam Light Festival – gezellig, strak en modern. Jij regelt de mensen, wij de rest. Boek direct via WhatsApp of e‑mail." />
+  <meta name="description" content="Canal Cruise & Amsterdam Light Festival 27 nov 2025 - 18 jan 2026 – met verse soep en glühwein. Boek direct via WhatsApp of e‑mail." />
+  <!-- Open Graph / WhatsApp / Facebook -->
+  <meta property="og:title" content="ALF25 – Canal Cruise & Light Festival 27 nov 2025 - 18 jan 2026" />
+  <meta property="og:description" content="Gezellig met verse soep en glühwein · Jij regelt de mensen, wij de rest · Boek direct via WhatsApp of e-mail." />
+  <meta property="og:image" content="alf25-share.png" />
+  <meta property="og:url" content="https://matthijshart.github.io/AmsterdamLightFestival/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ALF25 – Canal Cruise & Light Festival" />
+  <meta name="twitter:description" content="Gezellig met verse soep, glühwein en warme dekens · Jij regelt de mensen, wij de rest · Boek direct via WhatsApp of e-mail." />
+  <meta name="twitter:image" content="https://matthijshart.github.io/AmsterdamLightFestival/public/share/alf25-share.png" />
   <title>ALF25 – Canal Cruise & Light Festival</title>
+
+  <link rel="icon" type="image/svg+xml" href="logo_with_spacing.svg" />
+  <link rel="mask-icon" href="logo_with_spacing.svg" color="#0ea5e9" />
 
   <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -27,20 +42,168 @@
   <!-- Swiper (CDN) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
+    :root {
+      --sticky-header: 64px;
+      --extra-gap: 12px;
+    }
+
+    html {
+      scroll-padding-top: calc(var(--sticky-header) + var(--extra-gap));
+    }
+
+    #booking {
+      scroll-margin-top: calc(var(--sticky-header) + var(--extra-gap));
+    }
+
     /* Smooth image rendering */
-    img { image-rendering: -webkit-optimize-contrast; }
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    /* Hero scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: calc(1.5rem + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .scroll-indicator .chevron {
+      display: inline-block;
+      opacity: 0.85;
+      animation: bounce 1.8s infinite;
+      transform: translateY(0) rotate(90deg);
+    }
+
+    @keyframes bounce {
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0) rotate(90deg);
+      }
+      40% {
+        transform: translateY(8px) rotate(90deg);
+      }
+      60% {
+        transform: translateY(4px) rotate(90deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-indicator .chevron {
+        animation: none;
+        transform: rotate(90deg);
+      }
+    }
+
+    /* Hero pagination adjustments */
+
+    #hero {
+      --hero-pagination-offset: clamp(9rem, 20vh, 13rem);
+    }
+
+
+    #hero .swiper {
+      position: relative;
+    }
+
+    #hero .swiper-pagination {
+      position: absolute;
+
+     
+     bottom: 400px;
+      left: 50%;
+      transform: translateX(-50%);
+
+     
+     bottom: 400px;
+      left: 50%;
+      transform: translate(-50%, calc(-50% - 6rem));
+
+      width: auto;
+      display: flex;
+      gap: 0.75rem;
+      z-index: 30;
+    }
+
+    #hero .swiper-pagination-bullet {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      border-radius: 9999px;
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0.65);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    #hero .swiper-pagination-bullet-active {
+      background-color: #fff;
+      transform: scale(1.25);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (max-width: 640px) {
+
+      #hero {
+        --hero-pagination-offset: clamp(7rem, 18vh, 11rem);
+      }
+
+      #hero .swiper-pagination {
+
+      #hero .swiper-pagination {
+        transform: translate(-50%, calc(-50% - 4.5rem));
+
+        gap: 0.5rem;
+      }
+
+      #hero .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+      }
+    }
   </style>
 </head>
 <body class="bg-white text-black antialiased">
+  <!-- Announcement bar -->
+  <div id="top-announcement" class="w-full bg-[#eb5368] text-white/80 text-center text-xs py-1.5 fixed top-0 z-50">
+    Bij regen: kosteloos annuleren of verplaatsen
+  </div>
   <!-- Sticky top nav -->
-  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-black/5">
+  <header class="sticky top-[28px] z-40 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-black/5">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="#hero" class="font-semibold tracking-tight text-xl">ALF25</a>
+      <a href="#hero" class="flex flex-col items-start font-semibold tracking-tight">
+        <div class="flex items-center gap-2 text-xl">
+          <img
+            src="logo_with_spacing.svg"
+            alt="ALF25 logo"
+            class="h-9 w-auto"
+            decoding="async"
+          />
+          <span>ALF25</span>
+        </div>
+        <!-- Nieuw: periode onder ALF25 -->
+        <span class="text-sm text-black/70">27 nov – 18 jan</span>
+      </a>
       <nav class="flex items-center gap-3">
         <a href="#how" class="hidden md:inline-block text-sm hover:underline">Hoe boeken</a>
-        <a href="#boeken" class="hidden md:inline-block text-sm hover:underline">Boeken</a>
         <a
-          href="https://wa.me/31624978211?text=Boekingsaanvraag%20ALF25%20%E2%80%93%20Hallo!%20Ik%20wil%20graag%20boeken."
+          id="nav-books-link"
+          href="#booking"
+          class="hidden md:inline-block text-sm hover:underline"
+        >
+          Boeken
+        </a>
+        <a
+          id="nav-whatsapp-book"
+          href="#booking"
           class="inline-flex items-center rounded-2xl bg-black px-4 py-2 text-white text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
         >WhatsApp boeken</a>
       </nav>
@@ -57,8 +220,8 @@
           <div class="absolute inset-0 flex items-center justify-center text-center p-4">
             <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
               <h1 class="text-3xl md:text-5xl font-bold text-white">Privé boottocht · Amsterdam Light Festival</h1>
-              <p class="mt-2 text-lg text-white/90">Exclusief voor jouw groep · max. 11 personen</p>
-              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+              <p class="mt-2 text-lg text-white/90">Exclusief voor jouw groep · 6-11 personen</p>
+              <a href="#booking" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
             </div>
           </div>
         </div>
@@ -69,18 +232,18 @@
             <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
               <h2 class="text-3xl md:text-5xl font-bold text-white">Warme dekens, glühwein &amp; erwtensoep</h2>
               <p class="mt-2 text-lg text-white/90">Geniet met vrienden van lichtkunst op de grachten</p>
-              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+              <a href="#booking" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
             </div>
           </div>
         </div>
         <!-- 3 -->
         <div class="swiper-slide relative">
-          <img src="public/images/amsterdam-light-festival-2021-route.jpg" alt="Route Amsterdam Light Festival" class="w-full h-full object-cover" loading="lazy" />
+          <img src="Vrienden_op_boot_liggend_crop.png" alt="Sfeervolle avondvaart" class="w-full h-full object-cover" loading="lazy" />
           <div class="absolute inset-0 flex items-center justify-center text-center p-4">
             <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
-              <h2 class="text-3xl md:text-5xl font-bold text-white">Met schipper én hostess aan boord</h2>
-              <p class="mt-2 text-lg text-white/90">Iedereen verzorgd met drankjes &amp; soep</p>
-              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+              <h2 class="text-3xl md:text-5xl font-bold text-white">Intiem, gezellig, écht Amsterdams</h2>
+              <p class="mt-2 text-lg text-white/90">Kleine groepen · geen massatoerisme</p>
+              <a href="#booking" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
             </div>
           </div>
         </div>
@@ -91,18 +254,18 @@
             <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
               <h2 class="text-3xl md:text-5xl font-bold text-white">€59,95 p.p. all-in · 90 min</h2>
               <p class="mt-2 text-lg text-white/90">Tijdsloten 17:30 · 19:30 · 21:30</p>
-              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+              <a href="#booking" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
             </div>
           </div>
         </div>
         <!-- 5 -->
         <div class="swiper-slide relative">
-          <img src="public/images/Bewonerspagina2.jpg" alt="Sfeervolle avondvaart" class="w-full h-full object-cover" loading="lazy" />
+          <img src="public/images/amsterdam-light-festival-2021-route.jpg" alt="Route Amsterdam Light Festival" class="w-full h-full object-cover" loading="lazy" />
           <div class="absolute inset-0 flex items-center justify-center text-center p-4">
             <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
-              <h2 class="text-3xl md:text-5xl font-bold text-white">Intiem, gezellig, écht Amsterdams</h2>
-              <p class="mt-2 text-lg text-white/90">Kleine groepen · geen massatoerisme</p>
-              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+              <h2 class="text-3xl md:text-5xl font-bold text-white">Met schipper én hostess aan boord</h2>
+              <p class="mt-2 text-lg text-white/90">Iedereen verzorgd met drankjes &amp; soep</p>
+              <a href="#booking" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
             </div>
           </div>
         </div>
@@ -113,7 +276,7 @@
             <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
               <h2 class="text-3xl md:text-5xl font-bold text-white">Comfort aan boord</h2>
               <p class="mt-2 text-lg text-white/90">Kussens, speakers en grote borreltafel</p>
-              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+              <a href="#booking" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
             </div>
           </div>
         </div>
@@ -124,7 +287,23 @@
             <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
               <h2 class="text-3xl md:text-5xl font-bold text-white">Boek direct via WhatsApp</h2>
               <p class="mt-2 text-lg text-white/90">Snel vol — reserveer je plek vandaag</p>
-              <a href="#boeken" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+              <a href="#booking" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
+            </div>
+          </div>
+        </div>
+        <!-- 8 -->
+        <div class="swiper-slide relative">
+          <img
+            src="public/images/vrienden-amsterdamse-grachtenboot.png"
+            alt="Vrienden aan boord van een Amsterdamse grachtenboot tijdens het lichtfestival"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 flex items-center justify-center text-center p-4">
+            <div class="bg-black/50 px-6 py-5 rounded-2xl max-w-xl">
+              <h2 class="text-3xl md:text-5xl font-bold text-white">27 november t/m 18 januari</h2>
+              <p class="mt-2 text-lg text-white/90">Vier het Amsterdam Light Festival met jouw groep</p>
+              <a href="#booking" class="mt-6 inline-block rounded-2xl bg-white text-black px-6 py-3 font-semibold">Boek nu</a>
             </div>
           </div>
         </div>
@@ -132,6 +311,10 @@
 
       <!-- Pagination -->
       <div class="swiper-pagination"></div>
+    </div>
+    <div class="scroll-indicator">
+      <span class="sr-only">Scroll verder om meer te ontdekken</span>
+      <span aria-hidden="true" class="chevron">&#x276F;</span>
     </div>
   </section>
 
@@ -141,7 +324,7 @@
       <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <li class="p-6 rounded-2xl ring-1 ring-black/5">
           <p class="text-sm uppercase tracking-wide text-black/60">Capaciteit</p>
-          <p class="mt-2 text-xl font-semibold">Tot <span class="whitespace-nowrap">11 personen</span></p>
+          <p class="mt-2 text-xl font-semibold"><span class="whitespace-nowrap">6-11 personen</span></p>
         </li>
         <li class="p-6 rounded-2xl ring-1 ring-black/5">
           <p class="text-sm uppercase tracking-wide text-black/60">Comfort</p>
@@ -182,7 +365,7 @@
  
 
   <!-- Amsterdam Light Festival – Aanbod -->
-  <section id="aanbod" class="py-12">
+  <section id="aanbod" class="hidden py-12 md:block">
     <div class="mx-auto max-w-4xl px-4">
       <div class="rounded-2xl ring-1 ring-black/5 p-6 md:p-8 bg-white">
         <div class="flex items-center justify-between gap-4 flex-wrap">
@@ -197,7 +380,7 @@
           </div>
           <div class="rounded-xl bg-neutral-50 p-4 ring-1 ring-black/5">
             <p class="text-sm text-black/60">Groep</p>
-            <p class="text-lg font-semibold">max. 11 personen</p>
+            <p class="text-lg font-semibold">6-11 personen</p>
           </div>
           <div class="rounded-xl bg-neutral-50 p-4 ring-1 ring-black/5">
             <p class="text-sm text-black/60">Periode</p>
@@ -207,7 +390,7 @@
 
 
   <!-- Gecombineerde sectie: Aanbod + Boekingsaanvraag -->
-  <section id="boeken" class="py-16 md:py-20 bg-neutral-50">
+  <section id="booking" class="py-16 md:py-20 bg-neutral-50">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12">
       <!-- Info blok (aanbod) -->
       <div>
@@ -215,7 +398,7 @@
         <span class="inline-block mt-4 rounded-full bg-black text-white px-4 py-1 font-medium">All-in €59,95 p.p.</span>
         <ul class="mt-6 space-y-3 text-lg text-black/80">
           <li class="flex items-start"><span class="mr-3 text-black">•</span> 90 minuten varen</li>
-          <li class="flex items-start"><span class="mr-3 text-black">•</span> max. 11 personen</li>
+          <li class="flex items-start"><span class="mr-3 text-black">•</span> 6-11 personen</li>
           <li class="flex items-start"><span class="mr-3 text-black">•</span> Tijdsloten: 17:30 · 19:30 · 21:30</li>
           <li class="flex items-start"><span class="mr-3 text-black">•</span> Warme glühwein, verse erwtensoep & frisdrank inbegrepen</li>
           <li class="flex items-start"><span class="mr-3 text-black">•</span> Warme dekentjes aan boord</li>
@@ -228,21 +411,34 @@
         <form id="booking-form" class="grid gap-4 bg-white p-6 rounded-2xl ring-1 ring-black/5" novalidate>
           <input class="rounded-xl border border-black/10 px-4 py-3" id="name" name="name" placeholder="Naam*" required>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input class="rounded-xl border border-black/10 px-4 py-3" id="date" type="date" name="date" required>
+            <input class="rounded-xl border border-black/10 px-4 py-3" id="date" type="date" name="date" min="2025-11-27" max="2026-01-18" required>
             <select class="rounded-xl border border-black/10 px-4 py-3" id="time" name="time" required>
               <option value="">Kies tijdslot</option>
               <option>17:30</option><option>19:30</option><option>21:30</option>
             </select>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input class="rounded-xl border border-black/10 px-4 py-3" id="people" type="number" min="1" max="11" name="people" placeholder="Aantal personen*" required>
+            <input class="rounded-xl border border-black/10 px-4 py-3" id="people" type="number" inputmode="numeric" pattern="[0-9]*" min="6" max="11" name="people" placeholder="Aantal personen*" required>
             <input class="rounded-xl border border-black/10 px-4 py-3" id="phone" name="phone" placeholder="Telefoon of e-mail*" required>
           </div>
+
           <p id="total-price" class="text-sm text-black/70 hidden"></p>
+          <input 
+            class="rounded-xl border border-black/10 px-4 py-3" 
+            id="discount" 
+            name="discount" 
+            placeholder="Kortingscode (optioneel)">
+
+
           <textarea class="rounded-xl border border-black/10 px-4 py-3" id="message" name="message" rows="3" placeholder="Opmerkingen (optioneel)"></textarea>
+          <p id="total-price" class="hidden mt-3 text-lg font-semibold text-black"></p>
           <div class="flex flex-wrap gap-3 items-center">
             <button type="submit" class="rounded-2xl bg-black text-white px-6 py-3 font-semibold">WhatsApp reserveren</button>
-            <a id="fallback-email" href="#" class="rounded-2xl bg-white ring-1 ring-black/10 px-6 py-3 font-semibold">of e‑mail</a>
+            <a
+              id="fallback-email"
+              href="mailto:bookings@canalstartup.nl?subject=Boekingsaanvraag%20ALF25&body=Ik%20wil%20graag%20een%20vaartocht%20boeken%20tijdens%20het%20Amsterdam%20Light%20Festival%20op%20%5Bdatum%5D%20om%20%5Btijd%5D%20met%20%5Baantal%5D%20personen."
+              class="rounded-2xl bg-white ring-1 ring-black/10 px-6 py-3 font-semibold"
+            >of e‑mail</a>
           </div>
           <p id="form-feedback" class="text-sm text-black/60">Het zit snel vol — stuur je voorkeursdatum en tijdslot mee.</p>
         </form>
@@ -271,18 +467,46 @@
         </details>
         <details class="group rounded-2xl ring-1 ring-black/5 p-5">
           <summary class="cursor-pointer font-medium">Hoe groot mag de groep zijn?</summary>
-          <div class="mt-2 text-black/80">Tot 11 personen. Kleinere groepen zijn ook welkom.</div>
+          <div class="mt-2 text-black/80">Tussen 6 en 11 personen.</div>
+        </details>
+        <details class="group rounded-2xl ring-1 ring-black/5 p-5">
+          <summary class="cursor-pointer font-medium">Wat als het regent?</summary>
+          <div class="mt-2 text-black/80">Bij regen kunt u kosteloos annuleren.</div>
         </details>
       </div>
     </div>
   </section>
         
+
+
+  <!-- Sticky contact bar (mobile) -->
+  <div class="fixed inset-x-0 bottom-0 z-40 md:hidden">
+    <div class="mx-auto max-w-7xl px-4 pb-4">
+      <div class="mb-safe rounded-2xl bg-white/95 backdrop-blur ring-1 ring-black/10 shadow-sm">
+        <div class="grid grid-cols-3 divide-x divide-black/10">
+          <a
+            href="#booking"
+            class="py-3 text-center font-semibold"
+            data-scroll-method="scrollIntoView"
+          >WhatsApp</a>
+          <a href="tel:+31624978211" class="py-3 text-center font-semibold">Bel</a>
+          <a
+            href="#booking"
+            class="py-3 text-center font-semibold"
+            data-scroll-method="scrollIntoView"
+          >E‑mail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- Footer -->
   <footer class="py-10 border-t border-black/5 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <p class="text-sm text-black/60">© <span id="year"></span> ALF25 – Amsterdam</p>
       <div class="flex items-center gap-4 text-sm">
-        <a href="#boeken" class="hover:underline">Boeken</a>
+        <a href="#booking" class="hover:underline">Boeken</a>
         <a href="https://instagram.com/" target="_blank" rel="noopener" class="hover:underline">Instagram</a>
       </div>
     </div>
@@ -302,42 +526,48 @@
       keyboard: { enabled: true }
     });
 
-    // Slow scroll for Boek nu links
-    const boekLinks = document.querySelectorAll('a[href="#boeken"]');
-    const boekenSection = document.getElementById('boeken');
+    (function () {
+      const bookingSection = document.getElementById('booking');
 
-    function easeInOutQuad(t) {
-      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-    }
-
-    function slowScrollToBoeken(event) {
-      if (!boekenSection) return;
-      event.preventDefault();
-
-      const startY = window.scrollY || window.pageYOffset;
-      const targetY = boekenSection.getBoundingClientRect().top + startY;
-      const distance = targetY - startY;
-      const duration = 1200;
-      let startTime = null;
-
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = easeInOutQuad(progress);
-        window.scrollTo(0, startY + distance * eased);
-
-        if (elapsed < duration) {
-          requestAnimationFrame(step);
-        } else {
-          window.history.replaceState(null, '', '#boeken');
-        }
+      function getStickyOffset() {
+        const header = document.querySelector('header');
+        const announce = document.getElementById('top-announcement');
+        const h = header ? header.getBoundingClientRect().height : 0;
+        const a = announce ? announce.getBoundingClientRect().height : 0;
+        return h + a + 12; // kleine extra marge
       }
 
-      requestAnimationFrame(step);
-    }
+      function setScrollPaddingVar() {
+        document.documentElement.style.setProperty('--sticky-header', getStickyOffset() + 'px');
+      }
+      setScrollPaddingVar();
+      window.addEventListener('resize', setScrollPaddingVar);
 
-    boekLinks.forEach((link) => link.addEventListener('click', slowScrollToBoeken));
+      function scrollToBookingWithOffset(e) {
+        if (!bookingSection) return;
+        if (e) e.preventDefault();
+        const startY = window.scrollY || window.pageYOffset;
+        const targetY = bookingSection.getBoundingClientRect().top + startY - getStickyOffset();
+        const duration = 600;
+        let start;
+
+        function step(ts) {
+          if (!start) start = ts;
+          const progress = Math.min((ts - start) / duration, 1);
+          const eased = progress < 0.5
+            ? 2 * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+          window.scrollTo(0, startY + (targetY - startY) * eased);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      document
+        .querySelectorAll('a[href="#booking"], [data-scroll-method="scrollIntoView"]')
+        .forEach((el) => el.addEventListener('click', scrollToBookingWithOffset));
+    })();
 
 
     const gallerySwiper = new Swiper('#gallery .swiper', {
@@ -370,8 +600,19 @@
     const feedback = document.getElementById('form-feedback');
     const fallbackEmail = document.getElementById('fallback-email');
     const peopleInput = document.getElementById('people');
+    const dateInput = document.getElementById('date');
     const totalPriceEl = document.getElementById('total-price');
     const pricePerPerson = 59.95;
+    const discountInput = document.getElementById('discount');
+    let discountActive = false;
+
+    // Geldige kortingscodes
+    const discountCodes = {
+      'HGH': 0.15,     // 15% korting
+      'EVA25': 0.25    // 25% korting
+    };
+    const minDate = dateInput?.getAttribute('min');
+    const maxDate = dateInput?.getAttribute('max');
 
     function formatCurrency(amount) {
       return amount.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
@@ -391,11 +632,26 @@
       return lines.join(' | ');
     }
 
+    function buildEmailBody(data) {
+      const intro = `Ik wil graag een vaartocht boeken tijdens het Amsterdam Light Festival op ${data.date || '[datum]'} om ${data.time || '[tijd]'} met ${data.people || '[aantal]'} personen.`;
+      const extra = [
+        data.name ? `Naam: ${data.name}` : null,
+        data.phone ? `Telefoon: ${data.phone}` : null,
+        data.total ? `Totaal: ${formatCurrency(data.total)}` : null,
+        data.message ? `Bericht: ${data.message}` : null
+      ].filter(Boolean);
+
+      const bodyParts = [intro];
+      if (extra.length) bodyParts.push('', ...extra);
+      return bodyParts.join('\n');
+    }
+
     function encode(str) { return encodeURIComponent(str); }
 
-    function openWhatsAppOrFallback(msg) {
+    function openWhatsAppOrFallback(msg, data) {
       const waURL = `https://wa.me/31624978211?text=${encode(msg)}`;
-      const mailURL = `mailto:bookings@canalstartup.nl?subject=Boekingsaanvraag%20ALF25&body=${encode(msg)}`;
+      const mailBody = buildEmailBody(data);
+      const mailURL = `mailto:bookings@canalstartup.nl?subject=Boekingsaanvraag%20ALF25&body=${encode(mailBody)}`;
 
       // Update fallback link for accessibility
       fallbackEmail.setAttribute('href', mailURL);
@@ -406,18 +662,52 @@
       feedback.textContent = 'WhatsApp geopend? Zo niet: klik op “of e-mail”.';
     }
 
+    function sanitizePeopleCount(value) {
+      const digitsOnly = value.replace(/\D/g, '');
+      if (!digitsOnly) return '';
+
+      let numericValue = Number(digitsOnly);
+      if (Number.isNaN(numericValue) || numericValue === 0) return '';
+      if (numericValue > 11) numericValue = 11;
+
+      return String(numericValue);
+    }
+
     function updatePrice() {
       const count = Number(peopleInput.value);
       if (count > 0) {
-        const total = count * pricePerPerson;
-        totalPriceEl.textContent = `Totaal: ${formatCurrency(total)}`;
+        let total = count * pricePerPerson;
+        discountActive = false;
+
+        // Check kortingscode (ongeacht hoofdletters)
+        const code = discountInput?.value.trim().toUpperCase();
+        if (discountCodes[code]) {
+          const korting = discountCodes[code];
+          total = total * (1 - korting);
+          discountActive = true;
+          totalPriceEl.innerHTML = `<strong>Totaalprijs: ${formatCurrency(total)}</strong> <span class="text-green-600">(${korting * 100}% korting toegepast)</span>`;
+        } else {
+          totalPriceEl.textContent = `Totaalprijs: ${formatCurrency(total)}`;
+        }
         totalPriceEl.classList.remove('hidden');
       } else {
         totalPriceEl.classList.add('hidden');
       }
     }
 
-    peopleInput?.addEventListener('input', updatePrice);
+    function handlePeopleInput() {
+      if (!peopleInput) return;
+      const sanitizedValue = sanitizePeopleCount(peopleInput.value);
+      if (sanitizedValue !== peopleInput.value) {
+        peopleInput.value = sanitizedValue;
+      }
+      updatePrice();
+    }
+
+    peopleInput?.addEventListener('input', handlePeopleInput);
+    peopleInput?.addEventListener('blur', handlePeopleInput);
+    discountInput?.addEventListener('input', updatePrice);
+    if (peopleInput) handlePeopleInput();
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -430,7 +720,12 @@
         message: document.getElementById('message').value.trim()
       };
 
-      data.total = pricePerPerson * Number(data.people);
+      let totalPrice = pricePerPerson * Number(data.people);
+      const appliedCode = discountInput?.value.trim().toUpperCase();
+      if (discountCodes[appliedCode]) {
+        totalPrice = totalPrice * (1 - discountCodes[appliedCode]);
+      }
+      data.total = totalPrice;
 
       // Simple validation
       const required = ['name','phone','people','date','time'];
@@ -443,8 +738,15 @@
         }
       }
 
+      if (minDate && maxDate && (data.date < minDate || data.date > maxDate)) {
+        feedback.classList.remove('sr-only');
+        feedback.className = 'mt-3 text-sm text-red-600';
+        feedback.textContent = 'Kies een datum tussen 27 november 2025 en 18 januari 2026.';
+        return;
+      }
+
       const msg = buildMessage(data);
-      openWhatsAppOrFallback(msg);
+      openWhatsAppOrFallback(msg, data);
     });
   </script>
 </body>

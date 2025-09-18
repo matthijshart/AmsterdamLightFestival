@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2d9a"/>
+      <stop offset="100%" stop-color="#ffa726"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffa726"/>
+      <stop offset="100%" stop-color="#ffd54a"/>
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd54a"/>
+      <stop offset="100%" stop-color="#7cf2c8"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Helper: functie om een 'X' te tekenen bestaat niet in pure SVG, dus 2 rechthoeken kruisen -->
+  <!-- X #1 -->
+  <g transform="translate(256,128)" filter="url(#softGlow)">
+    <rect x="-80" y="-16" width="160" height="32" rx="16" fill="url(#grad1)" transform="rotate(45)"/>
+    <rect x="-80" y="-16" width="160" height="32" rx="16" fill="url(#grad1)" transform="rotate(-45)"/>
+  </g>
+
+  <!-- X #2 -->
+  <g transform="translate(256,256)" filter="url(#softGlow)">
+    <rect x="-80" y="-16" width="160" height="32" rx="16" fill="url(#grad2)" transform="rotate(45)"/>
+    <rect x="-80" y="-16" width="160" height="32" rx="16" fill="url(#grad2)" transform="rotate(-45)"/>
+  </g>
+
+  <!-- X #3 -->
+  <g transform="translate(256,384)" filter="url(#softGlow)">
+    <rect x="-80" y="-16" width="160" height="32" rx="16" fill="url(#grad3)" transform="rotate(45)"/>
+    <rect x="-80" y="-16" width="160" height="32" rx="16" fill="url(#grad3)" transform="rotate(-45)"/>
+  </g>
+</svg>
