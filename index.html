@@ -173,7 +173,11 @@
 </head>
 <body class="bg-white text-black antialiased">
   <!-- Announcement bar -->
+
   <div id="top-announcement" class="w-full bg-[rgb(0,250,154)] text-white/80 text-center text-xs py-1.5 fixed top-0 z-50">
+
+  <div id="top-announcement" class="w-full bg-[#eb5368] text-white/80 text-center text-xs py-1.5 fixed top-0 z-50">
+
     Bij regen: kosteloos annuleren of verplaatsen
   </div>
   <!-- Sticky top nav -->
@@ -421,8 +425,17 @@
             <input class="rounded-xl border border-black/10 px-4 py-3" id="people" type="number" inputmode="numeric" pattern="[0-9]*" min="6" max="11" name="people" placeholder="Aantal personen*" required>
             <input class="rounded-xl border border-black/10 px-4 py-3" id="phone" name="phone" placeholder="Telefoon of e-mail*" required>
           </div>
+
           <p id="total-price" class="text-sm text-black/70 hidden"></p>
+          <input 
+            class="rounded-xl border border-black/10 px-4 py-3" 
+            id="discount" 
+            name="discount" 
+            placeholder="Kortingscode (optioneel)">
+
+
           <textarea class="rounded-xl border border-black/10 px-4 py-3" id="message" name="message" rows="3" placeholder="Opmerkingen (optioneel)"></textarea>
+          <p id="total-price" class="hidden mt-3 text-lg font-semibold text-black"></p>
           <div class="flex flex-wrap gap-3 items-center">
             <button type="submit" class="rounded-2xl bg-black text-white px-6 py-3 font-semibold">WhatsApp reserveren</button>
             <a
@@ -591,6 +604,14 @@
     const dateInput = document.getElementById('date');
     const totalPriceEl = document.getElementById('total-price');
     const pricePerPerson = 59.95;
+    const discountInput = document.getElementById('discount');
+    let discountActive = false;
+
+    // Geldige kortingscodes
+    const discountCodes = {
+      'HGH': 0.15,     // 15% korting
+      'EVA25': 0.25    // 25% korting
+    };
     const minDate = dateInput?.getAttribute('min');
     const maxDate = dateInput?.getAttribute('max');
 
@@ -656,8 +677,19 @@
     function updatePrice() {
       const count = Number(peopleInput.value);
       if (count > 0) {
-        const total = count * pricePerPerson;
-        totalPriceEl.textContent = `Totaal: ${formatCurrency(total)}`;
+        let total = count * pricePerPerson;
+        discountActive = false;
+
+        // Check kortingscode (ongeacht hoofdletters)
+        const code = discountInput?.value.trim().toUpperCase();
+        if (discountCodes[code]) {
+          const korting = discountCodes[code];
+          total = total * (1 - korting);
+          discountActive = true;
+          totalPriceEl.innerHTML = `<strong>Totaalprijs: ${formatCurrency(total)}</strong> <span class="text-green-600">(${korting * 100}% korting toegepast)</span>`;
+        } else {
+          totalPriceEl.textContent = `Totaalprijs: ${formatCurrency(total)}`;
+        }
         totalPriceEl.classList.remove('hidden');
       } else {
         totalPriceEl.classList.add('hidden');
@@ -675,6 +707,7 @@
 
     peopleInput?.addEventListener('input', handlePeopleInput);
     peopleInput?.addEventListener('blur', handlePeopleInput);
+    discountInput?.addEventListener('input', updatePrice);
     if (peopleInput) handlePeopleInput();
 
     form?.addEventListener('submit', (e) => {
@@ -688,7 +721,12 @@
         message: document.getElementById('message').value.trim()
       };
 
-      data.total = pricePerPerson * Number(data.people);
+      let totalPrice = pricePerPerson * Number(data.people);
+      const appliedCode = discountInput?.value.trim().toUpperCase();
+      if (discountCodes[appliedCode]) {
+        totalPrice = totalPrice * (1 - discountCodes[appliedCode]);
+      }
+      data.total = totalPrice;
 
       // Simple validation
       const required = ['name','phone','people','date','time'];
