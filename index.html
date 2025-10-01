@@ -449,8 +449,8 @@
               <p id="people-error" class="hidden text-sm text-red-600" data-error-for="people">Geef aantal personen op</p>
             </div>
             <div class="flex flex-col gap-1">
-              <input class="rounded-xl border border-black/10 px-4 py-3" id="phone" name="phone" placeholder="Telefoon of e-mail*" required>
-              <p id="phone-error" class="hidden text-sm text-red-600" data-error-for="phone">Vul een telefoon of e-mail in</p>
+              <input class="rounded-xl border border-black/10 px-4 py-3" id="phone" type="tel" inputmode="numeric" pattern="[0-9\\s+]*" name="phone" placeholder="Telefoonnummer*" required>
+              <p id="phone-error" class="hidden text-sm text-red-600" data-error-for="phone">Vul een telefoonnummer in</p>
             </div>
           </div>
 
@@ -636,7 +636,7 @@
     const errorSummary = document.getElementById('form-error-summary');
     const requiredFieldMessages = {
       name: 'Vul je naam in',
-      phone: 'Vul een telefoon of e-mail in',
+      phone: 'Vul een telefoonnummer in',
       people: 'Geef aantal personen op',
       date: 'Kies een datum',
       time: 'Kies een tijdslot'
