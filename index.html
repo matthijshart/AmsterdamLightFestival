@@ -728,18 +728,19 @@
     }
 
     function buildMessage(data) {
-      const lines = [
-        'Boekingsaanvraag ALF25',
-        `Naam: ${data.name}`,
-        `Telefoon: ${data.phone}`,
-        `Datum: ${data.date}`,
-        `Tijd: ${data.time}`,
-        `# Personen: ${data.people}`,
-        data.total ? `Totaal: ${formatCurrency(data.total)}` : null,
-        data.message ? `Bericht: ${data.message}` : null
-      ].filter(Boolean);
-      return lines.join(' | ');
-    }
+  const lines = [
+    'Boekingsaanvraag Amsterdam light festival',
+    `Naam: ${data.name}`,
+    `Telefoon: ${data.phone}`,
+    `Datum: ${data.date}`,
+    `Tijd: ${data.time}`,
+    `# Personen: ${data.people}`,
+    data.total ? `Totaal: ${formatCurrency(data.total)}` : null,
+    data.message ? `Bericht: ${data.message}` : null
+  ].filter(Boolean);
+
+  return lines.join('\n\n'); // lege regel ertussen voor extra ruimte
+}
 
     function buildEmailBody(data) {
       const intro = `Ik wil graag een vaartocht boeken tijdens het Amsterdam Light Festival op ${data.date || '[datum]'} om ${data.time || '[tijd]'} met ${data.people || '[aantal]'} personen.`;
